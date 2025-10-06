@@ -250,6 +250,7 @@ void write(int fd, StringView data)
     const char* ptr = data.data();
     ssize_t count   = (int)data.length();
 
+	// This can be removed with no impact on the overall performance.
     // int flags = fcntl(fd, F_GETFL, 0);
     // if (not atomic and EventManager::has_instance())
     //     fcntl(fd, F_SETFL, flags | O_NONBLOCK);
