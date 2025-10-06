@@ -10,10 +10,9 @@ function in `src/terminal_ui.cc`, with the `write` syscall being called on the
 
 The `TerminalUi::Screen::output` function essentially works by printing the 
 synchronization escape codes `\x1b[?2026h` and `\x1b[?2026l`, with all the 
-content inside. The content is printed by outputing every line that has 
-changed, prepended with a `\x1b[\{line\}H` in order to place each line on the 
-correct row. To terminate a line, the standard `\x1b[K` sequence is called when 
-there is space there.
+content inside. The content is printed by outputing every line prepended with a 
+`\x1b[\{line\}H` in order to place each line on the correct row. To terminate a 
+line, the standard `\x1b[K` sequence is called when there is space left.
 
 The `write` syscall is called for every 4096 bytes in the buffered writer, 
 until all bytes have been printed out.
@@ -22,7 +21,7 @@ until all bytes have been printed out.
 related to the performance of writing that kakoune gets. However, when 
 bypassing `pselect` and just placing the `write` calls inside of a loop that 
 repeats every 10 nanoseconds (the same rate as typing on my keyboard, which is 
-the rate at which kakoune was printing), the performance drops to the expected 
+the rate that kakoune was printing at), the performance drops to the expected 
 level, given my text editor and another experiment.
 
 Overall, the syscalls don't seem to indicate that anything special is going on 
