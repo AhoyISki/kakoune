@@ -1,3 +1,13 @@
+Testing Patch
+-------------
+
+This is a testing patch to understand Kakoune's performant printing.
+
+The relevant code for printing can be found in the `TerminalUi::Screen::output` 
+function in `src/terminal_ui.cc`, with the `write` syscall being called on the 
+`write` function in `src/file.cc`. For `pselect`, that can be found in the 
+`EventManager::JKhandle_next_events` function in `src/event_manager.cc`.
+
 = image:{logo}[K,30,30,link="{website}",title="Kakoune logo by p0nce"] Kakoune image:{cirrus-img}[link="{cirrus-url}"] image:{srht-img}[link="{srht-url}"] image:{irc-img}[link="{irc-url}"]
 ifdef::env-github,env-browser[:outfilesuffix: .asciidoc]
 :logo: https://rawgit.com/mawww/kakoune/master/doc/kakoune_logo.svg
