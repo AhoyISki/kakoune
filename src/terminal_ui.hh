@@ -11,6 +11,7 @@
 #include "user_interface.hh"
 #include "unique_ptr.hh"
 
+#include <chrono>
 #include <termios.h>
 
 namespace Kakoune
@@ -95,6 +96,8 @@ private:
 
         UniquePtr<size_t[]> hashes;
         Face m_active_face;
+        Optional<std::chrono::time_point<std::chrono::system_clock>> m_prev_time
+            = Optional<std::chrono::time_point<std::chrono::system_clock>>();
     };
 
     Window m_window;

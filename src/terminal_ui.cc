@@ -15,6 +15,7 @@
 #include <fcntl.h>
 #include <csignal>
 #include <sys/ioctl.h>
+#include <thread>
 #include <unistd.h>
 #include <strings.h>
 
@@ -318,7 +319,7 @@ void TerminalUI::Screen::output(bool force, bool synchronized, Writer& writer)
                 writer.write(String{' ', skip});
         }
     };
-
+    
     if (synchronized)
     {
         writer.write("\033[?2026h"); // begin synchronized update
@@ -342,8 +343,7 @@ void TerminalUI::Screen::output(bool force, bool synchronized, Writer& writer)
                     break;
             }
         });
-        std::copy(new_hashes.begin(), new_hashes.end(), hashes.get());
-
+        
         int line = 0;
         for (auto& change : changes)
         {

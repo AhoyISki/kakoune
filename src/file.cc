@@ -250,10 +250,10 @@ void write(int fd, StringView data)
     const char* ptr = data.data();
     ssize_t count   = (int)data.length();
 
-    int flags = fcntl(fd, F_GETFL, 0);
-    if (not atomic and EventManager::has_instance())
-        fcntl(fd, F_SETFL, flags | O_NONBLOCK);
-    auto restore_flags = OnScopeEnd([&] { fcntl(fd, F_SETFL, flags); });
+    // int flags = fcntl(fd, F_GETFL, 0);
+    // if (not atomic and EventManager::has_instance())
+    //     fcntl(fd, F_SETFL, flags | O_NONBLOCK);
+    // auto restore_flags = OnScopeEnd([&] { fcntl(fd, F_SETFL, flags); });
 
     while (count)
     {
